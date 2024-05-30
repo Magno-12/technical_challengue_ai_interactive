@@ -54,7 +54,7 @@ class ApplicationViewSet(GenericViewSet):
             "rejection_reason": null
         }
         """
-        serializer = ApplicationCreateSerializer(data=request.data)
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         application = serializer.save()
 
@@ -99,7 +99,7 @@ class ApplicationViewSet(GenericViewSet):
         }
         """
         application = self.get_object()
-        serializer = ApplicationSerializer(application, data=request.data)
+        serializer = self.get_serializer(application, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
@@ -142,7 +142,7 @@ class ApplicationViewSet(GenericViewSet):
         if status_data == 'approved':
             assign_grimoire_to_application(application)
 
-        serializer = ApplicationSerializer(application, data=request.data, partial=True)
+        serializer = self.get_serializer(application, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
