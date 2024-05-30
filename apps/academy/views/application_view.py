@@ -15,7 +15,14 @@ from ..utils.assign_grimoire_util import assign_grimoire_to_application
 
 class ApplicationViewSet(GenericViewSet):
     queryset = Application.objects.all()
-    serializer_class = ApplicationSerializer
+    def get_serializer_class(self):
+        if self.action in [
+            "list_applications",
+            "update_application",
+            "list_applications"
+        ]:
+            return ApplicationSerializer
+        return ApplicationCreateSerializer
 
     @swagger_auto_schema(tags=['Applications'])
     @action(detail=False, methods=['post'])
