@@ -5,10 +5,13 @@ from rest_framework.viewsets import GenericViewSet
 
 from drf_yasg.utils import swagger_auto_schema
 
-from ..models import Application
+from ..models.application import Application
+from ..models.assignment import Assignment
+from ..models.student import Student
 from ..serializers.application_serializer import(
     ApplicationSerializer,
-    ApplicationCreateSerializer
+    ApplicationCreateSerializer,
+    ApplicationStatusSerializer
 )
 from ..utils.assign_grimoire_util import assign_grimoire_to_application
 
@@ -16,11 +19,9 @@ from ..utils.assign_grimoire_util import assign_grimoire_to_application
 class ApplicationViewSet(GenericViewSet):
     queryset = Application.objects.all()
     def get_serializer_class(self):
-        if self.action in [
-            "list_applications",
-            "update_application",
-            "list_applications"
-        ]:
+        if self.action == 'update_application_status':
+            return ApplicationStatusSerializer
+        elif self.action in ['update_application', 'list_applications']:
             return ApplicationSerializer
         return ApplicationCreateSerializer
 
@@ -99,9 +100,42 @@ class ApplicationViewSet(GenericViewSet):
         }
         """
         application = self.get_object()
+        previous_status = application.status
+        previous_student_data = {
+            'first_name': application.student.first_name,
+            'last_name': application.student.last_name,
+            'identification': application.student.identification,
+            'age': application.student.age,
+            'magical_affinity': application.student.magical_affinity
+        }
+
         serializer = self.get_serializer(application, data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        updated_application = serializer.save()
+
+        updated_student_data = {
+            'first_name': updated_application.student.first_name,
+            'last_name': updated_application.student.last_name,
+            'identification': updated_application.student.identification,
+            'age': updated_application.student.age,
+            'magical_affinity': updated_application.student.magical_affinity
+        }
+
+        if previous_student_data != updated_student_data:
+            # Si los datos del estudiante han cambiado, actualizar todas las instancias relacionadas
+            Student.objects.filter(id=updated_application.student.id).update(**updated_student_data)
+
+        if previous_status == 'approved' and updated_application.status != 'approved':
+            # Si la solicitud estaba aprobada y se cambió a otro estado, eliminar la asignación de grimorio
+            Assignment.objects.filter(application=updated_application).delete()
+        elif previous_status != 'approved' and updated_application.status == 'approved':
+            # Si la solicitud no estaba aprobada y se cambió a aprobada, asignar un grimorio
+            assign_grimoire_to_application(updated_application)
+        elif updated_application.status == 'approved':
+            # Si la solicitud sigue estando aprobada después de la actualización, reasignar un grimorio
+            Assignment.objects.filter(application=updated_application).delete()
+            assign_grimoire_to_application(updated_application)
+
         return Response(serializer.data)
 
     @swagger_auto_schema(tags=['Applications'])
@@ -137,15 +171,19 @@ class ApplicationViewSet(GenericViewSet):
         }
         """
         application = self.get_object()
-        status_data = request.data.get('status')
-
-        if status_data == 'approved':
-            assign_grimoire_to_application(application)
-
-        serializer = self.get_serializer(application, data=request.data, partial=True)
+        previous_status = application.status
+        serializer = ApplicationStatusSerializer(application, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data)
+
+        if previous_status == 'approved' and application.status != 'approved':
+            # Si la solicitud estaba aprobada y se cambia a otro estado, eliminar la asignación de grimorio
+            Assignment.objects.filter(application=application).delete()
+        elif previous_status != 'approved' and application.status == 'approved':
+            # Si la solicitud no estaba aprobada y se cambia a aprobada, asignar un grimorio
+            assign_grimoire_to_application(application)
+
+        return Response(ApplicationSerializer(application).data)
 
     @swagger_auto_schema(tags=['Applications'])
     @action(detail=False, methods=['get'])
