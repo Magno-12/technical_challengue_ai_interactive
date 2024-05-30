@@ -1,7 +1,7 @@
 from django.db import models
 
 from apps.default.models.base_model import BaseModel
-from ..utils.choices_utils import MAGICAL_AFFINITIES
+from ..utils.choices_util import MAGICAL_AFFINITIES
 
 
 class Student(BaseModel):

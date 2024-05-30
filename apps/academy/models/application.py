@@ -1,7 +1,7 @@
 from django.db import models
 
 from apps.default.models.base_model import BaseModel
-from ..utils.choices_utils import APPLICATION_STATUSES
+from ..utils.choices_util import APPLICATION_STATUSES
 from .student import Student
 
 

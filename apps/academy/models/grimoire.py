@@ -1,7 +1,7 @@
 from django.db import models
 
 from apps.default.models.base_model import BaseModel
-from ..utils.choices_utils import(
+from ..utils.choices_util import(
     CLOVER_TYPES,
     CLOVER_LEAVES,
     RARITY_LEVELS
