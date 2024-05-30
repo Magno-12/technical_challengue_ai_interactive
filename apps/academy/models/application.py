@@ -18,3 +18,5 @@ class Application(BaseModel):
 
     def __str__(self):
         return f"Application #{self.id} - {self.student}"
+    class Meta:
+        db_table = 'Application'

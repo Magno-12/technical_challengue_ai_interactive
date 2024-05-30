@@ -13,3 +13,6 @@ class Assignment(BaseModel):
 
     def __str__(self):
         return f"Assignment #{self.id} - {self.application}"
+
+    class Meta:
+        db_table = 'Assignment'
