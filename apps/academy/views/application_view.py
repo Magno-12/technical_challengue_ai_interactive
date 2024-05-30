@@ -36,10 +36,10 @@ class ApplicationViewSet(GenericViewSet):
             "id": "b9g8h7i6-5d4c-3b2a-1z0y-9x8w7v6u5t4s",
             "student": {
                 "id": "a8f9c6d0-1b3a-4c5e-8f7g-6h5i4j3k2l1m",
-                "first_name": "John",
-                "last_name": "Doe",
-                "age": 20,
-                "magical_affinity": "Fire",
+                "first_name": "Yuno",
+                "last_name": "Grinberryall",
+                "age": 15,
+                "magical_affinity": "Wind"
                 "identification": "ABC1234567"
             },
             "application_date": "2023-06-10",
@@ -80,10 +80,10 @@ class ApplicationViewSet(GenericViewSet):
             "id": "b9g8h7i6-5d4c-3b2a-1z0y-9x8w7v6u5t4s",
             "student": {
                 "id": "a8f9c6d0-1b3a-4c5e-8f7g-6h5i4j3k2l1m",
-                "first_name": "John",
-                "last_name": "Doe",
-                "age": 20,
-                "magical_affinity": "Fire",
+                "first_name": "Yuno",
+                "last_name": "Grinberryall",
+                "age": 15,
+                "magical_affinity": "Wind"
                 "identification": "ABC1234567"
             },
             "application_date": "2023-06-10",
@@ -118,10 +118,10 @@ class ApplicationViewSet(GenericViewSet):
             "id": "b9g8h7i6-5d4c-3b2a-1z0y-9x8w7v6u5t4s",
             "student": {
                 "id": "a8f9c6d0-1b3a-4c5e-8f7g-6h5i4j3k2l1m",
-                "first_name": "John",
-                "last_name": "Doe",
-                "age": 20,
-                "magical_affinity": "Fire",
+                "first_name": "Yuno",
+                "last_name": "Grinberryall",
+                "age": 15,
+                "magical_affinity": "Wind"
                 "identification": "ABC1234567"
             },
             "application_date": "2023-06-10",
@@ -154,10 +154,10 @@ class ApplicationViewSet(GenericViewSet):
                 "id": "b9g8h7i6-5d4c-3b2a-1z0y-9x8w7v6u5t4s",
                 "student": {
                     "id": "a8f9c6d0-1b3a-4c5e-8f7g-6h5i4j3k2l1m",
-                    "first_name": "John",
-                    "last_name": "Doe",
-                    "age": 20,
-                    "magical_affinity": "Fire",
+                    "first_name": "Yuno",
+                    "last_name": "Grinberryall",
+                    "age": 15,
+                    "magical_affinity": "Wind"
                     "identification": "ABC1234567"
                 },
                 "application_date": "2023-06-10",
