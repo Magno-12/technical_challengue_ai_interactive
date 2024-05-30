@@ -26,16 +26,16 @@ class StudentCreateSerializer(serializers.ModelSerializer):
             'id',
             'first_name',
             'last_name',
-            'identification',
             'age',
             'magical_affinity'
         ]
 
     def create(self, validated_data):
         identification = self.generate_unique_identification()
-        student = Student.objects.create(
-            identification=identification, **validated_data
-        )
+
+        validated_data['identification'] = identification
+
+        student = Student.objects.create(**validated_data)
 
         return student
 

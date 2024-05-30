@@ -48,7 +48,9 @@ class StudentViewSet(GenericViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(
+            serializer.data, status=status.HTTP_201_CREATED
+        )
 
     @swagger_auto_schema(tags=['Students'])
     @action(detail=False, methods=['get'])
@@ -64,6 +66,7 @@ class StudentViewSet(GenericViewSet):
                 "id": "str",
                 "first_name": "Yuno",
                 "last_name": "Grinberryall",
+                "identification": "FcQZm0LNlk",
                 "age": 15,
                 "magical_affinity": "Wind"
             },
