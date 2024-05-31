@@ -109,7 +109,7 @@ WSGI_APPLICATION = 'technical_challenge_ai_interactive.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgres://db_ai_interactive_user:HHzSczyp3Cb9hmx8NgoFn7mFSbiGub0U@dpg-cpcruje3e1ms73f3n1rg-a/db_ai_interactive',
+        default='postgres://postgres.xvjkiwzynmgqwghagikm:[YOUR-PASSWORD]@aws-0-us-west-1.pooler.supabase.com:5432/postgres',
         conn_max_age=600
     )
 }
