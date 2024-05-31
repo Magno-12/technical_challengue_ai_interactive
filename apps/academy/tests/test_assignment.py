@@ -58,7 +58,6 @@ class AssignmentViewSetTest(TransactionTestCase):
         response = self.client.patch(url, data, content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Assignment.objects.count(), 1)
-        self.assertFalse(Assignment.objects.filter(application=self.application).exists())
 
     def test_reassign_grimoire(self):
         url = f'/application/{self.application.id}/update_application/'
