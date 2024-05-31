@@ -68,6 +68,10 @@ For a detailed exploration of the API endpoints, developers can utilize tools li
 
 - **Swagger**: Offers a web-based UI that renders Swagger-compliant APIs. If the project includes a Swagger schema, you can navigate to the API documentation URL (typically `/swagger/`) to see a list of endpoints, models, and try out the API directly in the browser.
 
+- **ReDoc**: Provides a web-based UI that renders OpenAPI-compliant APIs. If the project includes an OpenAPI schema, you can navigate to the API documentation URL (typically `/redoc/`) to see a list of endpoints, models, and try out the API directly in the browser.
+
+
+
 Both of these tools are instrumental in developing, testing, and documenting RESTful services and will provide comprehensive insights into the API's capabilities.
 
 ### Integration test
