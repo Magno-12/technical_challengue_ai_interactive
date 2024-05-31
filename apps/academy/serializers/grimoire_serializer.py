@@ -1,4 +1,3 @@
-# serializers/grimoire_serializer.py
 from rest_framework import serializers
 
 from ..models.grimoire import Grimoire
