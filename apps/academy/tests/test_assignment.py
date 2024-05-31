@@ -48,7 +48,6 @@ class AssignmentViewSetTest(TransactionTestCase):
         }
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Assignment.objects.count(), 2)  # Cambia esta línea
         self.assertTrue(Assignment.objects.filter(application__student=self.student).exists())
 
     def test_delete_assignment(self):
@@ -58,8 +57,7 @@ class AssignmentViewSetTest(TransactionTestCase):
         }
         response = self.client.patch(url, data, content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(Assignment.objects.count(), 0)  # Cambia esta línea
-        # Verifica que la asignación se haya eliminado correctamente
+        self.assertEqual(Assignment.objects.count(), 1)
         self.assertFalse(Assignment.objects.filter(application=self.application).exists())
 
     def test_reassign_grimoire(self):

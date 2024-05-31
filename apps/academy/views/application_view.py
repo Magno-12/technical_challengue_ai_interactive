@@ -35,7 +35,6 @@ class ApplicationViewSet(GenericViewSet):
         Body:
             {
                 "student": "a8f9c6d0-1b3a-4c5e-8f7g-6h5i4j3k2l1m",
-                "application_date": "2023-06-10"
             }
         ---
         Returns:

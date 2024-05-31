@@ -22,7 +22,7 @@ class StudentViewSetTest(TransactionTestCase):
             "first_name": "Asta",
             "last_name": "Staria",
             "age": 16,
-            "magical_affinity": "Sword"
+            "magical_affinity": "Darkness"
         }
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
