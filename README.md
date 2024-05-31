@@ -18,9 +18,6 @@ Each application in the `apps` directory is a vital component of the django proj
 
 With this modular and organized structure, each application is not only self-contained but also designed to integrate smoothly with the overall system, maintaining a clean and manageable codebase.
 
-
-- Dependency injection is employed throughout the applications, particularly in user creation, to maintain clean, maintainable, and testable code.
-
 ## Requirements to Run the Project
 
 ### Clone the Repository
